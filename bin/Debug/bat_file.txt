@@ -1,2 +1,0 @@
-lab_01.exe < expected_input.txt > output.txt
-fc output.txt expected_output.txt

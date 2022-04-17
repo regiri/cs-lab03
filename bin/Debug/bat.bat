@@ -1,0 +1,1 @@
+lab_01.exe <marks.txt >marks.svg
