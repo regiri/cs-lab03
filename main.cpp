@@ -84,12 +84,21 @@ void show_histogram_text(const vector<size_t>& bins)
 }
 
 
+vector<string> input_colours(size_t bin_count) {
+    vector<string> colours(bin_count);
+    for (int i = 0; i < bin_count; i++) {
+        cerr << "Enter bin " << i + 1 << " colour: ";
+        cin >> colours[i];
+        while (!check_color(colours[i])) {
+            cin >> colours[i];
+        }
+    }
+    return colours;
+}
 
 
 int main()
 {
-
-
     //Ввод данных
     size_t number_count;
     cerr << "enter number count: ";
@@ -102,8 +111,9 @@ int main()
     cin >> bin_count;
     //Расчет гистограммы
     const auto bins = make_histogram(numbers, bin_count);
+    const auto colours = input_colours(bin_count);
     //Вывод гистограммы
-    show_histogram_svg(bins);
+    show_histogram_svg(bins, colours);
 
     return 0;
 }

@@ -1,5 +1,7 @@
 #include <vector>
 #include "histogram.h"
+#include <iostream>
+#include <string>
 
 using namespace std;
 
@@ -21,4 +23,12 @@ void find_minmax(const vector<double>& numbers, double& min, double& max)
             max = num;
         }
     }
+}
+
+
+bool check_color(string color) {
+    if (color.length() == 0){
+        return false;
+    }
+    return (color[0] == '#') || (color.find(' ') == string::npos);
 }
