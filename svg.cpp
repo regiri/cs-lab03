@@ -54,13 +54,13 @@ void show_histogram_svg(const vector<size_t>& bins, vector<string> colours)
     svg_begin(IMAGE_WIDTH, IMAGE_HEIGHT);
     double top = 0;
     for (size_t i = 0; i < bins.size(); i++) {
-        size_t height = bins[i];
-        if (max_count > MAX_ASTERISK)
+        size_t height = bins[i] * BLOCK_WIDTH;
+        if (max_count * BLOCK_WIDTH > IMAGE_WIDTH - TEXT_WIDTH)
         {
-            height = MAX_ASTERISK * (static_cast<double>(bins[i]) / max_count);
+            height = (IMAGE_WIDTH - TEXT_WIDTH) * (static_cast<double>(bins[i]) / max_count);
         }
-        const double bin_width = BLOCK_WIDTH * height;
-        svg_text(TEXT_LEFT, top + TEXT_BASELINE, to_string(height));
+        const double bin_width = height;
+        svg_text(TEXT_LEFT, top + TEXT_BASELINE, to_string(bins[i]));
         svg_rect(TEXT_WIDTH, top, bin_width, BIN_HEIGHT, colours[i], colours[i]);
         top += BIN_HEIGHT;
     }

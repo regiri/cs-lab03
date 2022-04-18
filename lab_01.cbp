@@ -35,6 +35,8 @@
 		<Unit filename="histogram.cpp" />
 		<Unit filename="histogram.h" />
 		<Unit filename="main.cpp" />
+		<Unit filename="svg.cpp" />
+		<Unit filename="svg.h" />
 		<Extensions>
 			<lib_finder disable_auto="1" />
 		</Extensions>
