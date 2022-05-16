@@ -1,19 +1,36 @@
 #include <iostream>
 #include <vector>
+#include <istream>
 #include "histogram.h"
 #include "svg.h"
 using namespace std;
 
-vector<double> input_numbers(size_t cnt)
+struct Input {
+    vector<double> numbers;
+    size_t bin_count;
+};
+
+vector<double> input_numbers(istream& in, size_t cnt)
 {
     vector<double> result(cnt);
     for (size_t i = 0; i < cnt; i++)
     {
-        cin >> result[i];
+        in >> result[i];
     }
     return result;
 }
 
+Input read_input(istream& in) {
+    Input data;
+    cerr << "enter number count: ";
+    size_t number_count;
+    in >> number_count;
+    cerr << "Enter numbers: ";
+    data.numbers = input_numbers(in, number_count);
+    cerr << "enter bin count: ";
+    cin >> data.bin_count;
+    return data;
+}
 
 vector<size_t> make_histogram(const vector<double>& numbers, const size_t bin_count)
 {
@@ -83,37 +100,13 @@ void show_histogram_text(const vector<size_t>& bins)
     }
 }
 
-
-vector<string> input_colours(size_t bin_count) {
-    vector<string> colours(bin_count);
-    for (int i = 0; i < bin_count; i++) {
-        cerr << "Enter bin " << i + 1 << " colour: ";
-        cin >> colours[i];
-        while (!check_color(colours[i])) {
-            cin >> colours[i];
-        }
-    }
-    return colours;
-}
-
-
 int main()
 {
-    //Ввод данных
-    size_t number_count;
-    cerr << "enter number count: ";
-    cin >> number_count;
-
-    const auto numbers = input_numbers(number_count);
-
-    size_t bin_count;
-    cerr << "enter bin count: ";
-    cin >> bin_count;
+    Input data = read_input(cin);
     //Расчет гистограммы
-    const auto bins = make_histogram(numbers, bin_count);
-    const auto colours = input_colours(bin_count);
+    const auto bins = make_histogram(data.numbers, data.bin_count);
     //Вывод гистограммы
-    show_histogram_svg(bins, colours);
+    show_histogram_svg(bins);
 
     return 0;
 }
