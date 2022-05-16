@@ -4,6 +4,8 @@
 #include "histogram.h"
 #include "svg.h"
 #include <curl/curl.h>
+#include <sstream>
+#include <string>
 using namespace std;
 
 vector<double> input_numbers(istream& in, size_t cnt)
@@ -27,7 +29,7 @@ Input read_input(istream& in, bool prompt) {
     data.numbers = input_numbers(in, number_count);
     if (prompt)
         cerr << "enter bin count: ";
-    cin >> data.bin_count;
+    in >> data.bin_count;
     return data;
 }
 
@@ -98,10 +100,40 @@ void show_histogram_text(const vector<size_t>& bins)
     }
 }
 
-int main()
+
+size_t write_data(void* items, size_t item_size, size_t item_count, void* ctx) {
+    stringstream* buffer = reinterpret_cast<stringstream*>(ctx);
+    size_t data_size = item_size * item_count;
+    buffer->write((char*)items, data_size);
+    return data_size;
+}
+
+Input download(const string& address) {
+    stringstream buffer;
+    CURL *curl = curl_easy_init();
+    if(curl) {
+        CURLcode res;
+        curl_easy_setopt(curl, CURLOPT_URL, address.c_str());
+        curl_easy_setopt(curl, CURLOPT_WRITEDATA, &buffer);
+        curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, write_data);
+        res = curl_easy_perform(curl);
+        if (res != 0) {
+            cerr << curl_easy_strerror(res);
+            exit(1);
+        }
+        curl_easy_cleanup(curl);
+    }
+    return read_input(buffer, true);
+}
+
+int main(int argc, char* argv[])
 {
-    curl_global_init(CURL_GLOBAL_ALL);
-    const auto data = read_input(cin, true);
+    Input data;
+    if (argc > 1) {
+        data = download(argv[1]);
+    } else {
+        data = read_input(cin, true);
+    }
     //Расчет гистограммы
     const auto bins = make_histogram(data);
     //Вывод гистограммы
