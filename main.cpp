@@ -5,11 +5,6 @@
 #include "svg.h"
 using namespace std;
 
-struct Input {
-    vector<double> numbers;
-    size_t bin_count;
-};
-
 vector<double> input_numbers(istream& in, size_t cnt)
 {
     vector<double> result(cnt);
@@ -20,33 +15,36 @@ vector<double> input_numbers(istream& in, size_t cnt)
     return result;
 }
 
-Input read_input(istream& in) {
+Input read_input(istream& in, bool prompt) {
     Input data;
-    cerr << "enter number count: ";
+    if (prompt)
+        cerr << "enter number count: ";
     size_t number_count;
     in >> number_count;
-    cerr << "Enter numbers: ";
+    if (prompt)
+        cerr << "Enter numbers: ";
     data.numbers = input_numbers(in, number_count);
-    cerr << "enter bin count: ";
+    if (prompt)
+        cerr << "enter bin count: ";
     cin >> data.bin_count;
     return data;
 }
 
-vector<size_t> make_histogram(const vector<double>& numbers, const size_t bin_count)
+vector<size_t> make_histogram(Input input)
 {
     double min, max;
-    find_minmax(numbers, min, max);
-    double bin_size = (max - min) / bin_count;
-    vector<size_t> bins(bin_count, 0);
-    for (size_t i = 0; i < numbers.size(); i++)
+    find_minmax(input.numbers, min, max);
+    double bin_size = (max - min) / input.bin_count;
+    vector<size_t> bins(input.bin_count, 0);
+    for (size_t i = 0; i < input.numbers.size(); i++)
     {
         bool found = false;
-        for (size_t j = 0; j < bin_count - 1 && !found; j++)
+        for (size_t j = 0; j < input.bin_count - 1 && !found; j++)
         {
             auto lo = min + j * bin_size;
             auto hi = min + (j + 1) * bin_size;
 
-            if (lo <= numbers[i] && numbers[i] < hi)
+            if (lo <= input.numbers[i] && input.numbers[i] < hi)
             {
                 bins[j]++;
                 found = true;
@@ -54,12 +52,11 @@ vector<size_t> make_histogram(const vector<double>& numbers, const size_t bin_co
         }
         if (!found)
         {
-            bins[bin_count - 1]++;
+            bins[input.bin_count - 1]++;
         }
     }
     return bins;
 }
-
 
 void show_histogram_text(const vector<size_t>& bins)
 {
@@ -102,9 +99,9 @@ void show_histogram_text(const vector<size_t>& bins)
 
 int main()
 {
-    Input data = read_input(cin);
+    const auto data = read_input(cin, true);
     //Расчет гистограммы
-    const auto bins = make_histogram(data.numbers, data.bin_count);
+    const auto bins = make_histogram(data);
     //Вывод гистограммы
     show_histogram_svg(bins);
 
