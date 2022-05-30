@@ -2,6 +2,7 @@
 #include <vector>
 #include "histogram.h"
 #include "svg.h"
+
 using namespace std;
 
 vector<double> input_numbers(size_t cnt)
@@ -97,8 +98,10 @@ vector<string> input_colours(size_t bin_count) {
 }
 
 
+
 int main()
 {
+
     //¬вод данных
     size_t number_count;
     cerr << "enter number count: ";
