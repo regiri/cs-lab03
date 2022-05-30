@@ -18,7 +18,8 @@ vector<double> input_numbers(istream& in, size_t cnt)
     return result;
 }
 
-Input read_input(istream& in, bool prompt) {
+Input read_input(istream& in, bool prompt)
+{
     Input data;
     if (prompt)
         cerr << "enter number count: ";
@@ -101,25 +102,39 @@ void show_histogram_text(const vector<size_t>& bins)
 }
 
 
-size_t write_data(void* items, size_t item_size, size_t item_count, void* ctx) {
+size_t write_data(void* items, size_t item_size, size_t item_count, void* ctx)
+{
     stringstream* buffer = reinterpret_cast<stringstream*>(ctx);
     size_t data_size = item_size * item_count;
     buffer->write((char*)items, data_size);
     return data_size;
 }
 
-Input download(const string& address) {
+Input download(const string& address)
+{
     stringstream buffer;
     CURL *curl = curl_easy_init();
-    if(curl) {
+    if(curl)
+    {
         CURLcode res;
         curl_easy_setopt(curl, CURLOPT_URL, address.c_str());
         curl_easy_setopt(curl, CURLOPT_WRITEDATA, &buffer);
         curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, write_data);
+        double stm;
+
         res = curl_easy_perform(curl);
-        if (res != 0) {
-            cerr << curl_easy_strerror(res);
+        if (res != CURLE_OK)
+        {
+            cerr << curl_easy_strerror(res) << endl;
             exit(1);
+        }
+        else
+        {
+            res = curl_easy_getinfo(curl, CURLINFO_SIZE_DOWNLOAD, &stm);
+            if (res == CURLE_OK)
+            {
+                cerr << "file size in bytes: " << stm << endl;
+            }
         }
         curl_easy_cleanup(curl);
     }
@@ -129,9 +144,12 @@ Input download(const string& address) {
 int main(int argc, char* argv[])
 {
     Input data;
-    if (argc > 1) {
+    if (argc > 1)
+    {
         data = download(argv[1]);
-    } else {
+    }
+    else
+    {
         data = read_input(cin, true);
     }
     //Расчет гистограммы

@@ -31,6 +31,14 @@ void svg_rect(double x, double y, double width, double height, string stroke = "
 }
 
 
+string
+make_info_text() {
+    stringstream buffer;
+    // TODO: получить версию системы, записать в буфер.
+    // TODO: получить имя компьютера, записать в буфер.
+    return buffer.str();
+}
+
 void show_histogram_svg(const vector<size_t>& bins)
 {
     const auto IMAGE_WIDTH = 400;
