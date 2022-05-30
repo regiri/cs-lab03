@@ -6,6 +6,7 @@
 #include <curl/curl.h>
 #include <sstream>
 #include <string>
+
 using namespace std;
 
 vector<double> input_numbers(istream& in, size_t cnt)
@@ -17,6 +18,19 @@ vector<double> input_numbers(istream& in, size_t cnt)
     }
     return result;
 }
+
+vector<string> input_colours(size_t bin_count) {
+    vector<string> colours(bin_count);
+    for (int i = 0; i < bin_count; i++) {
+        cerr << "Enter bin " << i + 1 << " colour: ";
+        cin >> colours[i];
+        while (!check_color(colours[i])) {
+            cin >> colours[i];
+        }
+    }
+    return colours;
+}
+
 
 Input read_input(istream& in, bool prompt)
 {
@@ -121,7 +135,6 @@ Input download(const string& address)
         curl_easy_setopt(curl, CURLOPT_WRITEDATA, &buffer);
         curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, write_data);
         double stm;
-
         res = curl_easy_perform(curl);
         if (res != CURLE_OK)
         {
@@ -154,8 +167,9 @@ int main(int argc, char* argv[])
     }
     //Расчет гистограммы
     const auto bins = make_histogram(data);
+    const auto colours = input_colours(data.bin_count);
     //Вывод гистограммы
-    show_histogram_svg(bins);
+    show_histogram_svg(bins, colours);
 
     return 0;
 }

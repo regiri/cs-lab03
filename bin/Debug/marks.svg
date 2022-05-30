@@ -1,9 +1,10 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <svg width='400' height='300' viewBox='0 0 400 300' xmlns='http://www.w3.org/2000/svg'>
-<text x='20' y='20'>2</text>
-<rect x='50' y='0' width='20' height='30' stroke='black' fill='black' />
-<text x='20' y='50'>5</text>
-<rect x='50' y='30' width='50' height='30' stroke='black' fill='black' />
-<text x='20' y='80'>3</text>
-<rect x='50' y='60' width='30' height='30' stroke='black' fill='black' />
+<text x='20' y='20'>9</text>
+<rect x='50' y='0' width='31' height='30' stroke='red' fill='red' />
+<text x='20' y='50'>33</text>
+<rect x='50' y='30' width='115' height='30' stroke='green' fill='green' />
+<text x='20' y='80'>100</text>
+<rect x='50' y='60' width='350' height='30' stroke='blue' fill='blue' />
+<text x='20' y='110'>Windows v6.2 (build 9200) DESKTOP-JL3TDJU</text>
 </svg>

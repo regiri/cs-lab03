@@ -1,5 +1,7 @@
 # depslib dependency file v1.0
-1652730060 source:c:\users\gopa2\cpp_progs\lab_01\main.cpp
+218 <<<<<<< HEAD
+
+1653913667 source:c:\users\gopa2\cpp_progs\lab_01\main.cpp
 	<iostream>
 	<vector>
 	<istream>
@@ -9,24 +11,45 @@
 	<sstream>
 	<string>
 
-1652705049 c:\users\gopa2\cpp_progs\lab_01\histogram.h
+1653903650 _04_2
+	<iostream>
+	<vector>
+	<istream>
+	"histogram.h"
+	"svg.h"
+	<curl/curl.h>
+	<sstream>
+	<string>
+	<vector>
+	"histogram.h"
+	<iostream>
+	<string>
+	<iostream>
+	<vector>
+	"svg.h"
+
+1653903650 D
+
+1653913834 c:\users\gopa2\cpp_progs\lab_01\histogram.h
 	<vector>
 	<iostream>
 
-1652705049 source:c:\users\gopa2\cpp_progs\lab_01\histogram.cpp
+1653913823 source:c:\users\gopa2\cpp_progs\lab_01\histogram.cpp
 	<vector>
 	"histogram.h"
 	<iostream>
 	<string>
 
-1652700150 c:\users\gopa2\cpp_progs\lab_01\svg.h
+1653913950 c:\users\gopa2\cpp_progs\lab_01\svg.h
 
-1652700170 source:c:\users\gopa2\cpp_progs\lab_01\svg.cpp
+1653913976 source:c:\users\gopa2\cpp_progs\lab_01\svg.cpp
 	<iostream>
 	<vector>
 	"svg.h"
+	<windows.h>
+	<sstream>
 
-1652071940 c:\users\gopa2\cpp_progs\lab_01\curl\include\curl\curl.h
+1653913563 c:\users\gopa2\cpp_progs\lab_01\curl\include\curl\curl.h
 	"curlver.h"
 	"system.h"
 	<stdio.h>
@@ -46,9 +69,9 @@
 	"header.h"
 	"typecheck-gcc.h"
 
-1652239120 c:\users\gopa2\cpp_progs\lab_01\curl\include\curl\curlver.h
+1653913563 c:\users\gopa2\cpp_progs\lab_01\curl\include\curl\curlver.h
 
-1652071940 c:\users\gopa2\cpp_progs\lab_01\curl\include\curl\system.h
+1653913563 c:\users\gopa2\cpp_progs\lab_01\curl\include\curl\system.h
 	<winsock2.h>
 	<windows.h>
 	<ws2tcpip.h>
@@ -56,17 +79,17 @@
 	<sys/socket.h>
 	<sys/poll.h>
 
-1652071940 c:\users\gopa2\cpp_progs\lab_01\curl\include\curl\easy.h
+1653913563 c:\users\gopa2\cpp_progs\lab_01\curl\include\curl\easy.h
 
-1652071940 c:\users\gopa2\cpp_progs\lab_01\curl\include\curl\multi.h
+1653913563 c:\users\gopa2\cpp_progs\lab_01\curl\include\curl\multi.h
 	"curl.h"
 
-1652071940 c:\users\gopa2\cpp_progs\lab_01\curl\include\curl\urlapi.h
+1653913563 c:\users\gopa2\cpp_progs\lab_01\curl\include\curl\urlapi.h
 	"curl.h"
 
-1652071940 c:\users\gopa2\cpp_progs\lab_01\curl\include\curl\options.h
+1653913563 c:\users\gopa2\cpp_progs\lab_01\curl\include\curl\options.h
 
-1652076210 c:\users\gopa2\cpp_progs\lab_01\curl\include\curl\header.h
+1653913563 c:\users\gopa2\cpp_progs\lab_01\curl\include\curl\header.h
 
-1652071940 c:\users\gopa2\cpp_progs\lab_01\curl\include\curl\typecheck-gcc.h
+1653913563 c:\users\gopa2\cpp_progs\lab_01\curl\include\curl\typecheck-gcc.h
 
